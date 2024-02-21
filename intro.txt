@@ -1,0 +1,25 @@
+to open oracle server
+172.16.0.8/isqlpus #type in browser
+username: lab
+passwrod: lab 
+
+
+each cell is called field in database
+each row is called record
+there would be multiple tables in database and we will perform different algebric operations on them
+
+Homework: 
+    definition?
+        field, record, tuple, cardianlity, degree
+        union b/w two table/relation i.e AUB
+        intersection b/w two table/relation   i.e (A intersection B)
+
+
+student table
+ID | studnet name |  cgpa  | degree
+1  | Ali          |  3.0   | DS
+2  | Ahmad        |  3.2   | DS
+
+Query:
+SELECT * FROM Studnet; #to get all data from the table
+SELECT attribute FROM table_name;    #to select selective data
