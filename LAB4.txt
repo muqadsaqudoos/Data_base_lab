@@ -1,0 +1,48 @@
+question 1:
+select empno, ename, lpad(sal,10,'_'), mgr, hiredate
+from emp
+where ename like 'G%' or ename like 'A%' or ename like 'W%'  or ename like 'S%'
+
+question 2:
+select sal , hiredate
+from emp
+where ename like '%N'
+and to_char(hiredate, 'MON') = 'FEB'
+
+question 3
+select ename
+from emp
+where ename like'_A___' or ename like '_S___'
+and deptno = 10
+and mgr is NULL
+
+question 4:
+select ename, round((sysdate - hiredate)/7) as "Experience in Week"
+from emp
+where deptno = 20 or deptno = 30
+
+question 5
+select ename, round((sysdate- hiredate)/30) as "MONTHS WORKED"
+from emp
+order by round((sysdate- hiredate)/30)
+
+question 6
+select deptno, lower(ename) as "LOWER CASE" , upper(ename) as "UPPERCASE"
+from emp
+where mgr = 7563
+
+question 7 
+select ename ||'  earns  ' || sal ||'  monthly but wants  '|| 5*sal as "DREAM SALARIES"
+from emp
+
+question 8 
+select ename, empno, job, hiredate, mgr, sal,deptno, nvl(to_char(comm), 'NO COMMISSION')  as "NULL COMMISSION" from emp
+where comm is NULL
+ 
+question 9
+select hisal , to_char(hisal, '$99,999.00') as  hisal,losal
+from salgrade
+order by losal desc
+
+question 10
+select ename, substr(ename , 2, length(ename)) from emp
