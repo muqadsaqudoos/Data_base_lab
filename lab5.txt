@@ -1,0 +1,63 @@
+1:
+
+select dname, ename, loc
+from emp, dept
+where emp.deptno = dept.deptno
+and comm is not null
+
+2:
+
+select mod(sal,300)
+from emp
+where job = 'MANAGER'
+
+3:
+
+select hiredate, comm, dname, loc, emp.sal, grade
+from emp, dept, salgrade
+where emp.deptno = dept.deptno
+and sal between losal and hisal
+
+4:
+
+select max(sal) as highest, min(sal) as lowest, sum(sal) as sum, round(avg(sal)) as avgsal, count(empno) AS "No of Rows"
+from emp
+
+5:
+
+select sum(sal), round(avg(sal))
+from emp
+where deptno = 10
+
+6:
+
+select dept.dname, dept.deptno, dept.loc
+from dept, emp
+where emp.deptno = dept.deptno
+group by dept.deptno, dept.dname, dept.loc
+having sum(sal)> all(select avg(sal) from emp group by deptno)
+7:
+select e.ename as empname, m.ename as managername
+from emp e, emp m
+where e.mgr = m.empno
+8:
+select dname, job ,sal
+from emp,dept
+where emp.deptno = dept.deptno
+and sal in (select max(sal) from emp e
+where e.deptno = emp.deptno
+group by deptno)
+
+9:
+
+select e.ename , e.job, e.sal
+from emp e , emp m
+where e.mgr = m.empno
+and e.sal>m.sal
+
+10:
+
+select e.ename, e.hiredate, m.ename,m.hiredate
+from emp e, emp m
+where e.mgr = m. empno
+and e.hiredate<m.hiredate
