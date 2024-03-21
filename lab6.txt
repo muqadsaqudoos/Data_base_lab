@@ -1,0 +1,78 @@
+1:
+
+select ename 
+from emp
+where comm is null
+
+2:
+
+
+select e.ename 
+from emp e, emp m
+where e.mgr = m.empno
+and e.sal>m.sal
+and e.job <> 'MANAGER'
+
+3:
+
+
+SELECT e.ename
+FROM emp e
+where e.mgr is null
+and sal = (select max(sal) from emp)
+
+4:
+
+
+select ename
+from emp
+where hiredate = (select min(hiredate) from emp)
+
+5:
+
+select sum(sal) as total_sal , round(avg(sal)) as avg_sal
+from emp
+where deptno = 10
+
+6:
+
+select ename 
+from emp
+where comm is null
+and mgr is not null
+
+7:
+
+select dname, count(empno) as highest_no_of_employees
+from emp, dept
+where emp.deptno = dept.deptno
+group by dept.dname
+having count(empno) = (select max(count(empno)) from emp
+group by deptno)
+
+
+8:
+
+select ename, job, sal
+from emp
+where sal in (select min(sal) from emp group by deptno)
+
+9:
+
+select ename, job, sal
+from emp
+where mgr = (select mgr from emp group by deptno)
+and sal > (select avg(sal) from emp group by deptno)
+
+10:
+select 
+    e.ename AS employee_name,
+    e.hiredate,
+    m.ename AS manager_name
+from emp e, dept d, emp m
+where d.deptno = e.deptno
+and e.mgr = m.empno
+and (e.hiredate, e.deptno) in (select max(hiredate), deptno
+from emp
+group by deptno)
+
