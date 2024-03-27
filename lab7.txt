@@ -1,0 +1,75 @@
+1:
+
+select ename, deptno
+from emp
+where deptno = (select deptno from emp where ename = 'MARTIN')
+
+2:
+
+select ename, sal
+from emp
+where job = 'MANAGER'
+and sal = (select max(sal) from emp where job = 'MANAGER')
+
+3:
+
+select ename
+from emp
+where sal in (select max(sal) from emp 
+group by deptno)
+
+4:
+
+select loc, dname, emp.deptno
+from emp, dept
+where emp.deptno = dept.deptno
+group by emp.deptno, loc, dname
+having count(empno) >= 2
+
+5:
+
+select dname, round(avg(sal)) as avg_sal, count(empno) as no_of_emp
+from emp, dept
+where emp.deptno = dept.deptno
+and comm is not null
+group by dname
+
+6:
+
+select ename, job
+from emp,dept,salgrade
+where emp.deptno = dept.deptno
+and sal between losal and hisal
+and (grade = 4 or grade = 5)
+and (job = 'MANAGER' or job = 'ANALYST')
+
+7:
+
+select ename
+from emp
+where job in (select job from emp
+where deptno = 10)
+and deptno = 20
+
+8:
+
+
+select ename
+from emp
+where sal = (select max(sal) from emp,dept where emp.deptno = dept.deptno 
+and dname= 'SALES')
+
+9:
+
+
+select ename
+from emp
+where sal > (select avg(sal) from emp where deptno = 10)
+and deptno = 20
+
+10:
+
+select job, min(sal)
+from emp
+group by job 
+order by min(sal)
