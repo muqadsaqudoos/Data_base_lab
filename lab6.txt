@@ -58,11 +58,14 @@ from emp
 where sal in (select min(sal) from emp group by deptno)
 
 9:
-
-select ename, job, sal
-from emp
-where mgr = (select mgr from emp group by deptno)
-and sal > (select avg(sal) from emp group by deptno)
+SELECT E1.ENAME, E1.JOB, E1.SAL
+FROM EMP E1, EMP E2
+WHERE E1.MGR = E2.MGR AND E1.EMPNO <> E2.EMPNO
+AND E1.SAL > (
+    SELECT AVG(E3.SAL)
+FROM EMP E3
+WHERE E1.DEPTNO = E3.DEPTNO
+)
 
 10:
 select 
